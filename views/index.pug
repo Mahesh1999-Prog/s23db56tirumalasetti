@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1= title
+  p Assigment_10 on the #{title}
+  
+  button(type="button", class="btn btn-warning", onclick="goFaster()") Press Me 
+
+  div#faster(style="font-style: italic;") Increase the speed
+  script.
+    var mph = 20;
+    var change = 1;
+    
+    function goFaster() {
+      mph += change;
+      change += 1;
+      var divFaster = document.getElementById('faster');
+      divFaster.textContent = "MPH " + mph + " with change " + change;
+    }
+  div.text-center
+    a(href='/fruit') View Avaialble Fruits
