@@ -1,6 +1,6 @@
 # f23wb56tirumalasetti
 assignment_10: - Create a server template with the express generator
-[My Render Link](https://f23wb56tirumalasetti.onrender.com)
+[My Render Link](https://s23db56tirumalasetti.onrender.com)
 
 class fruit {
     constructor(name, color, quantity) {
