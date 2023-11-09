@@ -14,10 +14,32 @@ var fruit = require('../models/fruit');
 exports.fruit_detail = function(req, res) {
  res.send('NOT IMPLEMENTED: fruit detail: ' + req.params.id);
 };
+
+
 // Handle fruits create on POST.
-exports.fruit_create_post = function(req, res) {
- res.send('NOT IMPLEMENTED: fruit create POST');
-};
+// Handle Costume create on POST.
+exports.fruit_create_post = async function(req, res) {
+   console.log(req.body)
+   let document = new fruit();
+   // We are looking for a body, since POST does not have query parameters.
+   // Even though bodies can be in many different formats, we will be picky
+   // and require that it be a json object
+   // {"costume_type":"goat", "cost":12, "size":"large"}
+   document.fruit_type = req.body.fruit_type;
+   document.cost = req.body.cost;
+   document.size = req.body.size;
+   try{
+   let result = await document.save();
+   res.send(result);
+   }
+   catch(err){
+   res.status(500);
+   res.send(`{"error": ${err}}`);
+   } 
+  };
+
+
+
 // Handle fruits delete form on DELETE.
 exports.fruit_delete = function(req, res) {
  res.send('NOT IMPLEMENTED: fruit delete DELETE ' + req.params.id);
