@@ -26,3 +26,14 @@ exports.fruit_delete = function(req, res) {
 exports.fruit_update_put = function(req, res) {
  res.send('NOT IMPLEMENTED: fruit update PUT' + req.params.id);
 };
+// Handle a show all view
+exports.fruit_view_all_Page = async function(req, res) {
+  try{
+  thefruit = await fruit.find();
+  res.render('fruit', { title: 'fruit Search Results', results: thefruit });
+  }
+  catch(err){
+  res.status(500);
+  res.send(`{"error": ${err}}`);
+  } 
+ };
