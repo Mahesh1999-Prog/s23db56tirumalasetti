@@ -1,6 +1,6 @@
 var fruit = require('../models/fruit');
 // List of all fruits
-exports.fruit_list = async function(req, res) {
+exports.fruit_list = function(req, res) {
    res.send('NOT IMPLEMENTED: fruit list');
 };
 // for a specific fruit.
