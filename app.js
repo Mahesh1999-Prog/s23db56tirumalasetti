@@ -18,7 +18,7 @@ console.log("Connection to DB succeeded")});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var fruitRouter = require('./routes/fruits');
+var fruitRouter = require('./routes/fruit');
 var boardRouter = require('./routes/board');
 var chooseRouter = require('./routes/choose');
 var fruit = require("./models/fruit");
