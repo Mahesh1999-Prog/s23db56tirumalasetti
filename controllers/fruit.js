@@ -43,10 +43,20 @@ exports.fruit_create_post = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
    }
-// Handle fruit delete form on DELETE.
-exports.fruit_delete = function(req, res) {
- res.send('NOT IMPLEMENTED: fruit delete DELETE ' + req.params.id);
-};
+
+ // Handle fruit delete on DELETE.
+exports.fruit_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await fruit.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+   };
+     
 
 // Handle fruit update form on PUT.
 exports.fruit_update_put = async function(req, res) {
@@ -79,5 +89,19 @@ exports.fruit_view_all_Page = async function(req, res) {
     catch(err){
     res.status(500);
     res.send(`{"error": ${err}}`);
+    }
+   };
+
+   // Handle a show one view with id specified by query
+exports.fruit_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
+    try{
+    result = await fruit.findById( req.query.id)
+    res.render('fruitdetail', 
+   { title: 'fruit Detail', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
     }
    };
