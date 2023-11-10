@@ -98,7 +98,7 @@ exports.fruit_view_one_Page = async function(req, res) {
     try{
     result = await fruit.findById( req.query.id)
     res.render('fruitdetail', 
-   { title: 'fruit Detail', toShow: result });
+   { title: 'fruit Details', toShow: result });
     }
     catch(err){
     res.status(500)
