@@ -55,10 +55,10 @@ ${JSON.stringify(req.body)}`)
  try {
  let toUpdate = await fruit.findById( req.params.id)
  // Do updates of properties
- if(req.body.fruit_type)
- toUpdate.fruit_type = req.body.fruit_type;
- if(req.body.cost) toUpdate.cost = req.body.cost;
- if(req.body.size) toUpdate.size = req.body.size;
+ if(req.body.name)
+ toUpdate.name = req.body.name;
+ if(req.body.color) toUpdate.color = req.body.color;
+ if(req.body.quantity) toUpdate.quantity = req.body.quantity;
  let result = await toUpdate.save();
  console.log("Sucess " + result)
  res.send(result)
