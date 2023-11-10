@@ -12,7 +12,6 @@ exports.fruit_list = async function(req, res) {
    };
    
 // for a specific fruit.
-// for a specific fruit.
 exports.fruit_detail = async function(req, res) {
     console.log("detail" + req.params.id)
     try {
@@ -48,10 +47,28 @@ exports.fruit_create_post = async function(req, res) {
 exports.fruit_delete = function(req, res) {
  res.send('NOT IMPLEMENTED: fruit delete DELETE ' + req.params.id);
 };
+
 // Handle fruit update form on PUT.
-exports.fruit_update_put = function(req, res) {
- res.send('NOT IMPLEMENTED: fruit update PUT' + req.params.id);
+exports.fruit_update_put = async function(req, res) {
+ console.log(`update on id ${req.params.id} with body
+${JSON.stringify(req.body)}`)
+ try {
+ let toUpdate = await fruit.findById( req.params.id)
+ // Do updates of properties
+ if(req.body.fruit_type)
+ toUpdate.fruit_type = req.body.fruit_type;
+ if(req.body.cost) toUpdate.cost = req.body.cost;
+ if(req.body.size) toUpdate.size = req.body.size;
+ let result = await toUpdate.save();
+ console.log("Sucess " + result)
+ res.send(result)
+ } catch (err) {
+ res.status(500)
+ res.send(`{"error": ${err}: Update for id ${req.params.id}
+failed`);
+ }
 };
+
 // VIEWS
 // Handle a show all view
 exports.fruit_view_all_Page = async function(req, res) {
