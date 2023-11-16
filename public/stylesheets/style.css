@@ -8,7 +8,15 @@ a {
 }
 
 .fruitAttr {
-  background-color: aquamarine;
-  width: 120px;
- }
- 
+  background-color: rgb(255, 153, 127);
+  /*width: 120px;*/
+  color: brown;
+}
+
+
+
+
+.detail {
+  background-color: rgb(118, 118, 196);
+  text-align: center;
+}

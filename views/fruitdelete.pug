@@ -4,6 +4,7 @@ block content
   h1= title 
  
   if (toShow == null) 
+    h1(class='bonus')= title
     h2 No instance to delete 
   else 
     - let fruitid = toShow._id 
