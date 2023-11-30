@@ -2,21 +2,27 @@ extends layout
 
 block content
   h1= title
-  -
-    let items = results
-  div(class= "container-fluid")
-    div(class = "row m-1")
-      each value,index in items
-        - let destination = 'dispatch(\"/fruit/update?id=${value._id}\")'
-        div(class= "col-sm-2", onclick=`buy(${index})`) name: #{value.name}
-        div(class= "col-sm-2", onclick=`buy(${index})`) color: #{value.color}
-        div(class= "col-sm-2", onclick=`buy(${index})`) quantity: #{value.quantity}
-        button.btn( class="btn-primary ml-1", onclick= destination) Update
+  
+  - let items = results
+  - let destination = 'dispatch(\"/fruit/create")'
+    button.btn(class="btn-primary ml-1", onclick=destination) Create new fruit
+  div(class="container-fluid")
+    div(class="row m-1")
+      each value, index in items
+        - let updateDestination1 = `dispatch(\"/fruit/update?id=${value._id}\")`
+        - let detailDestination2 = `dispatch(\"/fruit/detail?id=${value._id}\")`
+        - let deleteDestination3 = `dispatch(\"/fruit/delete?id=${value._id}\")`
+        div(class="col-sm-2", onclick=`buy(${index})`) name: #{value.name}
+        div(class="col-sm-2", onclick=`buy(${index})`) color: #{value.color}
+        div(class="col-sm-2", onclick=`buy(${index})`) quantity: #{value.quantity}
+        button.btn(class="btn-primary ml-1", onclick=updateDestination1) Update
+        button.btn(class="btn-primary ml-1", onclick=detailDestination2) Detail
+        button.btn(class="btn-primary ml-1", onclick=deleteDestination3) Delete
         br
         br
         br
 
   script.
     function dispatch(path){
-      window.location.href=path
+      window.location.href = path
     }
