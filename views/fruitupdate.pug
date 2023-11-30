@@ -11,36 +11,42 @@ block content
     - let color = toShow.color
     - let quantity = toShow.quantity
 
+    div.row(class='fruitAttr mb-2')
+      div.mr-1 ID is
+      div #{fruitid}
 
-      div.row(class='fruitAttr mb-2')
-        div.mr-1 ID is
-        div #{fruitid}
-    - let actionid = "/resource/fruit/"+fruitid
-    form(id='fruitForm', action= actionid, method="PUT")
+    - let actionid = "/resource/fruit/" + fruitid
+    form(id='fruitForm', action=actionid, method="PUT")
       div.form-group
         label.fruitAttr(for='name') fruit name
-        input#name(type='text' name='name', value= name )
+        input#name(type='text' name='name', value=name)
       div.form-group
         label.fruitAttr(for='color') fruit color
-        input#color(type='text' name='color', value= color )
+        input#color(type='text' name='color', value=color)
       div.form-group
         label.fruitAttr(for='quantity') fruit quantity
-        input#quantity(type='number' name='quantity', value= quantity )
+        input#quantity(type='number' name='quantity', value=quantity)
       input(type="submit")
+    
     script.
       document.forms['fruitForm'].addEventListener('submit', (event) => {
         event.preventDefault();
-          // TODO do something here to show user that form is being submitted
+        // TODO do something here to show user that form is being submitted
         fetch(event.target.action, {
           method: 'PUT',
           body: new URLSearchParams(new FormData(event.target)) // event.target is the form
         }).then((resp) => {
-          return resp.json(); // or resp.text() or whatever the server sends
+          if (resp.ok) {
+            alert("Fruit Updated Successfully")
+            document.getElementById('fruitForm').reset()
+          } else {
+            alert("Failed to Update Fruit")
+          }
         }).then((body) => {
-          alert("Update succeded")
-            // TODO handle body
+          console.log(body)
+          // TODO handle body
         }).catch((error) => {
           // TODO handle error
-          alert("Update failed " + error )
+          alert("Update failed " + error)
         });
       });
